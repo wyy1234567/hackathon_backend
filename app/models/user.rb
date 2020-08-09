@@ -10,6 +10,7 @@ class User < ApplicationRecord
     has_many :relateds, through: :relative_relationship, source: :related
 
     validates :email, uniqueness: true
+    validates :username, uniqueness: true
 
     has_secure_password
 end

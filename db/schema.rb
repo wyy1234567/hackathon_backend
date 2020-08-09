@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_09_041229) do
+ActiveRecord::Schema.define(version: 2020_08_09_194927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2020_08_09_041229) do
     t.integer "curr_user"
     t.integer "relate_with_user"
     t.string "relationship"
-    t.boolean "is_accepted"
+    t.boolean "is_accepted", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -37,10 +37,11 @@ ActiveRecord::Schema.define(version: 2020_08_09_041229) do
   create_table "feedbacks", force: :cascade do |t|
     t.integer "event_id"
     t.integer "location_id"
-    t.boolean "masks"
+    t.boolean "ee_mask"
     t.integer "crowded"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "co_mask"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -48,14 +49,16 @@ ActiveRecord::Schema.define(version: 2020_08_09_041229) do
     t.decimal "longitude", precision: 15, scale: 13
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
+    t.string "full_name"
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "username"
   end
 
 end
