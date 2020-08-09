@@ -1,13 +1,11 @@
 class User < ApplicationRecord
     has_many :events
+
     has_many :connects
+    has_many :relatives, through: :connects
 
-
-    has_many :related_relationship, foreign_key: :curr_user, class_name: 'Connect'
-    has_many :self_users, through: :related_relationship, source: :self_user
-
-    has_many :relative_relationship, foreign_key: :relate_with_user, class_name: 'Connect'
-    has_many :relateds, through: :relative_relationship, source: :related
+    has_many :inverse_connects, class_name: "Connect", foreign_key: :relative_id
+    has_many :inverse_relatives, through: :inverse_connects, source: :user
 
     validates :email, uniqueness: true
     validates :username, uniqueness: true

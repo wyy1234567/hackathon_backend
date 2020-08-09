@@ -12,9 +12,8 @@ Location.destroy_all
 Feedback.destroy_all
 Connect.destroy_all
 
-
-user1 = User.create(name: 'Yueying Wang', email: 'wangyy395@gmail.com', password: '123')
-user2 = User.create(name: 'Leo Du', email: 'leodu@gmail.com', password: '123')
+user1 = User.create(full_name: 'Yueying Wang', email: 'wangyy395@gmail.com', password: '123', username: 'wangyy')
+user2 = User.create(full_name: 'Leo Du', email: 'leodu@gmail.com', password: '123', username: 'leodu')
 
 location1 = Location.create(latitude: 40.7864721, longitude: -74.0210207, name: 'Whole Foods Market')
 location2 = Location.create(latitude: 40.7527302, longitude: -73.9794181, name: 'Grand Central Terminal')
@@ -22,8 +21,6 @@ location2 = Location.create(latitude: 40.7527302, longitude: -73.9794181, name: 
 event1 = Event.create(user: user1, location: location1, status: 'completed', start: '2020-08-08 13:00:00 -0400', duration: 120)
 event2 = Event.create(user: user2, location: location2, status: 'upcoming', start: '2020-08-10 14:00:00 -0400', duration: 180)
 
-connection1 = Connect.create(curr_user: user1, relate_with_user: user2, relationship: 'family', is_accepted: true)
+connection1 = Connect.create(user: user1, relative: user2, relationship: 'family', is_accepted: true)
 
-# ee_mask? true?
-# co_mask? true?
-# feedback1 = Feedback.create(event: event1, location: location1, masks: true, crowded: false)
+feedback1 = Feedback.create(event: event1, location: location1, ee_mask: true, crowded: 3, co_mask: true)
